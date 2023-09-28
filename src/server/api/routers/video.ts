@@ -24,6 +24,8 @@ export const videoRouter = createTRPCRouter({
         throw new Error("No wallet");
       }
 
+      await ctx.prisma.video.deleteMany();
+
       // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       return ctx.prisma.video.create({
         data: {
@@ -35,5 +37,8 @@ export const videoRouter = createTRPCRouter({
     }),
   getAll: publicProcedure.query(({ ctx }) => {
     return ctx.prisma.example.findMany();
+  }),
+  getVideo: privateProcedure.query(({ ctx }) => {
+    return ctx.prisma.video.findFirst();
   }),
 });
