@@ -1,13 +1,15 @@
-import { useCallback } from "react";
-import { useUser, useAuth } from "@clerk/nextjs";
+// import { useUser } from "@clerk/nextjs";
 import { api } from "~/utils/api";
 
 export default function Home() {
-  const { user } = useUser();
+  // const { user } = useUser();
 
-  const hello = api.example.hello.useQuery({ text: "hello" });
+  // const hello = api.example.hello.useQuery({ text: "hello" });
+  const refreshWebHook = api.video.triggerHook.useMutation();
 
-  const refreshSilentData = useCallback(() => {}, []);
+  const refreshSilentData = () => {
+    refreshWebHook.mutate();
+  };
 
   return (
     <>
@@ -15,13 +17,9 @@ export default function Home() {
         Our little kittens enjoying farm life
       </h1>
       <iframe
-        frameborder="0"
         scrolling="no"
-        marginheight="0"
-        marginwidth="0"
         width="788.54"
         height="443"
-        type="text/html"
         src="https://www.youtube.com/embed/7yLxxyzGiko?autoplay=1&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0"
       ></iframe>
       {/* <div>Wallet {user?.primaryWeb3Wallet?.web3Wallet}</div>
