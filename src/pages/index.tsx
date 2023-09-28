@@ -12,7 +12,7 @@ export default function Home() {
     <>
       <h1>Home</h1>
 
-      {hello.data?.greeting}
+      <div>Greeting: {hello.data?.greeting}</div>
     </>
   );
 }
