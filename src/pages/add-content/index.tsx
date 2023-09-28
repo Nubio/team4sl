@@ -4,7 +4,7 @@ export default function MyContent() {
   const { user } = useUser();
   return (
     <div>
-      <h1 className="mb-8">Add Content</h1>
+      <h1 className="mb-8">Content</h1>
       <div>
         <div>
           <label
@@ -38,7 +38,12 @@ export default function MyContent() {
         </div>
         <div>
           <div className="mt-4">{}</div>
-          <div>{user?.primaryWeb3Wallet?.web3Wallet}</div>
+          <div>Wallet {user?.primaryWeb3Wallet?.web3Wallet}</div>
+        </div>
+        <div className="mt-4">
+          <button className="mb-2 mr-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700">
+            Add content
+          </button>
         </div>
       </div>
     </div>
