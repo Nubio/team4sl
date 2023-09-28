@@ -1,0 +1,31 @@
+org: nilsonbertolasls
+app: youtube-api
+service: youtube-api
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+plugins:
+  - serverless-offline
+
+functions:
+  api:
+    handler: index.handler
+    events:
+      - httpApi:
+          path: /
+          method: get
+  getVideos:
+    handler: youtube.getVideos
+    events:
+      - httpApi:
+          path: /videos
+          method: get
+  getVideoData:
+    handler: youtube.getVideoData
+    events:
+      - httpApi:
+          path: /video/{id}
+          method: get
