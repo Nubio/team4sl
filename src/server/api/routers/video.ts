@@ -55,4 +55,7 @@ export const videoRouter = createTRPCRouter({
       status: res.status,
     };
   }),
+  deleteAll: privateProcedure.query(async ({ ctx }) => {
+    await ctx.prisma.video.deleteMany();
+  }),
 });
