@@ -12,15 +12,24 @@ export const videoRouter = createTRPCRouter({
     .mutation(async ({ input, ctx }) => {
       const user = await clerkClient.users.getUser(ctx.auth.userId);
 
-      if (!user?.web3Wallets) {
-        throw new Error("Nope");
+      if (!user) {
+        throw new Error("No user");
       }
 
+      const walletAddress = user.web3Wallets.find(
+        (item) => item.id === user.primaryWeb3WalletId
+      )?.web3Wallet;
+
+      if (!walletAddress) {
+        throw new Error("No wallet");
+      }
+
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       return ctx.prisma.video.create({
         data: {
           videoUrl: input.videoUrl,
           silentDataHook: input.silentDataWebhook,
-          walletAddress: user?.web3Wallets[0].web3Wallet,
+          walletAddress,
         },
       });
     }),

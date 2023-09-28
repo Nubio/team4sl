@@ -10,6 +10,7 @@ export default function Home() {
     <>
       <h1>Home</h1>
       <div>Wallet {user?.primaryWeb3Wallet?.web3Wallet}</div>
+      <div>Verified: {user?.primaryWeb3Wallet?.verification.status}</div>
       <div>Greeting: {hello.data?.greeting}</div>
     </>
   );
