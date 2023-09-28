@@ -1,6 +1,4 @@
-import { authMiddleware, redirectToSignIn } from "@clerk/nextjs";
-import { clerkClient } from "@clerk/nextjs";
-import { type NextMiddlewareResult } from "next/dist/server/web/types";
+import { authMiddleware } from "@clerk/nextjs";
 
 // This example protects all routes including api/trpc routes
 // Please edit this to allow other routes to be public as needed.
