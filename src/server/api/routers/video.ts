@@ -35,9 +35,6 @@ export const videoRouter = createTRPCRouter({
         },
       });
     }),
-  getAll: publicProcedure.query(({ ctx }) => {
-    return ctx.prisma.example.findMany();
-  }),
   getVideo: privateProcedure.query(({ ctx }) => {
     return ctx.prisma.video.findFirst();
   }),
@@ -48,6 +45,18 @@ export const videoRouter = createTRPCRouter({
       throw new Error("No web hook");
     }
 
-    return fetch(video.silentDataHook);
+    const res = await fetch(video.silentDataHook, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({}),
+    });
+
+    console.log("status", res.status);
+
+    return {
+      status: res.status,
+    };
   }),
 });

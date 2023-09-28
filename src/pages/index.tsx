@@ -1,11 +1,7 @@
-// import { useUser } from "@clerk/nextjs";
 import { api } from "~/utils/api";
 
 export default function Home() {
-  // const { user } = useUser();
-
-  // const hello = api.example.hello.useQuery({ text: "hello" });
-
+  const video = api.video.getVideo.useQuery();
   const refreshWebHook = api.video.triggerHook.useMutation();
 
   const refreshSilentData = () => {
@@ -14,25 +10,22 @@ export default function Home() {
         console.error(error);
       },
       onSuccess(data) {
-        console.log(data);
+        console.log("response", data);
       },
     });
   };
 
   return (
     <>
-      <h1 className="mb-8 mt-12 text-4xl font-extrabold">
-        Our little kittens enjoying farm life
-      </h1>
-      <iframe
-        scrolling="no"
-        width="788.54"
-        height="443"
-        src="https://www.youtube.com/embed/7yLxxyzGiko?autoplay=1&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0"
-      ></iframe>
-      {/* <div>Wallet {user?.primaryWeb3Wallet?.web3Wallet}</div>
-      <div>Verified: {user?.primaryWeb3Wallet?.verification.status}</div>
-      <div>Greeting: {hello.data?.greeting}</div> */}
+      <h1 className="mb-8 mt-12 text-4xl font-extrabold">Our popular video</h1>
+      {video?.data?.videoUrl && (
+        <iframe
+          scrolling="no"
+          width="788.54"
+          height="443"
+          src={video.data?.videoUrl}
+        ></iframe>
+      )}
       <div className="mt-8">
         <button
           type="button"
