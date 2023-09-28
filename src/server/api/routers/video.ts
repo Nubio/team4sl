@@ -1,10 +1,6 @@
 import { clerkClient } from "@clerk/nextjs";
 import { z } from "zod";
-import {
-  createTRPCRouter,
-  privateProcedure,
-  publicProcedure,
-} from "~/server/api/trpc";
+import { createTRPCRouter, privateProcedure } from "~/server/api/trpc";
 
 export const videoRouter = createTRPCRouter({
   create: privateProcedure
