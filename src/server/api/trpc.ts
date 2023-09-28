@@ -117,4 +117,4 @@ export const publicProcedure = t.procedure;
  *
  * Verify that the user is authenticated
  */
-export const privateProcedure = () => t.procedure.use(isAuthed());
+export const privateProcedure = t.procedure.use(isAuthed());

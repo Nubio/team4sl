@@ -1,5 +1,10 @@
+import { clerkClient } from "@clerk/nextjs";
 import { z } from "zod";
-import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import {
+  createTRPCRouter,
+  privateProcedure,
+  publicProcedure,
+} from "~/server/api/trpc";
 
 export const exampleRouter = createTRPCRouter({
   hello: publicProcedure

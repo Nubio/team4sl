@@ -12,6 +12,8 @@ export default function Home() {
     <>
       <h1>Home</h1>
 
+      {user?.primaryWeb3Wallet?.web3Wallet}
+
       <div>Greeting: {hello.data?.greeting}</div>
     </>
   );

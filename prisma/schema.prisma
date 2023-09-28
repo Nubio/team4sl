@@ -15,3 +15,12 @@ model Example {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model Video {
+  id             String   @id @default(cuid())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @default(now())
+  walletAddress  String
+  videoUrl       String
+  silentDataHook String
+}
