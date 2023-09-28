@@ -1,14 +1,16 @@
 import { useUser, useAuth } from "@clerk/nextjs";
-
-import { ToolBar } from "../components/ui/topbar";
+import { api } from "~/utils/api";
 
 export default function Home() {
   const { user } = useUser();
-  const { isSignedIn } = useAuth();
 
-  if (!isSignedIn) {
-    return <div>Not signed in</div>;
-  }
+  const hello = api.example.hello.useQuery({ text: "hello" });
 
-  return <div>{user?.primaryWeb3Wallet?.web3Wallet}</div>;
+  return (
+    <>
+      <h1>Home</h1>
+      <div>Wallet {user?.primaryWeb3Wallet?.web3Wallet}</div>
+      <div>Greeting: {hello.data?.greeting}</div>
+    </>
+  );
 }

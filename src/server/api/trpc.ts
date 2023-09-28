@@ -12,7 +12,6 @@ import { TRPCError, initTRPC } from "@trpc/server";
 import { type CreateNextContextOptions } from "@trpc/server/adapters/next";
 import superjson from "superjson";
 import { ZodError } from "zod";
-import { UserHelpers } from "~/modules/users/helpers";
 import { prisma } from "~/server/db";
 
 /**
@@ -25,23 +24,19 @@ import { prisma } from "~/server/db";
 
 type CreateContextOptions = Record<string, RequestLike>;
 
-const isAuthed = (_role?: UserHelpers.UserRoles | UserHelpers.UserRoles[]) => t.middleware(({ next, ctx }) => {
-  const role = Array.isArray(_role) ? _role : (_role && [_role]) ?? [];
-  if (!ctx.auth.userId) {
-  throw new TRPCError({ code: 'UNAUTHORIZED' });
-}
+const isAuthed = () =>
+  t.middleware(({ next, ctx }) => {
+    if (!ctx.auth.userId) {
+      throw new TRPCError({ code: "UNAUTHORIZED" });
+    }
 
-if (role.length && [...UserHelpers.PRIVILEGED_ROLES, ...role].includes(ctx.auth.sessionClaims?.role as UserHelpers.UserRoles) === false) {
-  throw new TRPCError({ code: 'FORBIDDEN' });
-}
-
-return next({
-  ctx: {
-    ...ctx,
-    auth: ctx.auth
-  }
-});
-});
+    return next({
+      ctx: {
+        ...ctx,
+        auth: ctx.auth,
+      },
+    });
+  });
 
 /**
  * This helper generates the "internals" for a tRPC context. If you need to use it, you can export
@@ -119,7 +114,7 @@ export const publicProcedure = t.procedure;
 
 /**
  * Private (authenticate) procedure
- * 
+ *
  * Verify that the user is authenticated
  */
-export const privateProcedure = (role?: UserHelpers.UserRoles | UserHelpers.UserRoles[]) => t.procedure.use(isAuthed(role));
+export const privateProcedure = () => t.procedure.use(isAuthed());

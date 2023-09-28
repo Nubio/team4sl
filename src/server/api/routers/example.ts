@@ -12,4 +12,9 @@ export const exampleRouter = createTRPCRouter({
   getAll: publicProcedure.query(({ ctx }) => {
     return ctx.prisma.example.findMany();
   }),
+  sample: publicProcedure.query(() => {
+    return {
+      current_time: new Date().getTime(),
+    };
+  }),
 });
