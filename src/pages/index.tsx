@@ -5,10 +5,18 @@ export default function Home() {
   // const { user } = useUser();
 
   // const hello = api.example.hello.useQuery({ text: "hello" });
+
   const refreshWebHook = api.video.triggerHook.useMutation();
 
   const refreshSilentData = () => {
-    refreshWebHook.mutate();
+    refreshWebHook.mutate(undefined, {
+      onError(error) {
+        console.error(error);
+      },
+      onSuccess(data) {
+        console.log(data);
+      },
+    });
   };
 
   return (
