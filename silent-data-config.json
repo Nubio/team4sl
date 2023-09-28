@@ -1,0 +1,48 @@
+{
+  "id": "db64dd21-d32c-477e-9b2f-b8b41194ae30",
+  "name": "Youtube",
+  "trigger": {
+    "type": "HTTP",
+    "allowed_callers": [],
+    "format": "JSON"
+  },
+  "steps": [
+    {
+      "type": "REQUEST",
+      "format": "JSON",
+      "method": "GET",
+      "endpoint": "https://wzubv6tu43.execute-api.us-east-1.amazonaws.com/video/qwertyuiop",
+      "headers": {
+        "Authorization": "Bearer ${SECRETS.API_SECRET}"
+      }
+    },
+    {
+      "type": "ATTESTATION",
+      "rules": [
+        {
+          "source": "${STEPS[1].data.data.id}",
+          "operator": "==",
+          "target": "qwertyuiop"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "chain": "POLYGON",
+    "network": "TESTNET",
+    "success_response": {
+      "contract_address": "0x0129E8045eEA5E68F48C1A2Dd0e76E198EA3cE04",
+      "contract_method": "payReward",
+      "arguments": [
+        {
+          "type": "UINT256",
+          "value": "600"
+        },
+        {
+          "type": "ADDRESS",
+          "value": "0x139c5080A98aBB134afe140d1121F820380eDFCc"
+        }
+      ]
+    }
+  }
+}
