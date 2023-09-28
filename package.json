@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "next build",
+    "build": "next build && prisma db push",
     "dev": "next dev",
     "postinstall": "prisma generate",
     "lint": "next lint",
@@ -22,6 +22,7 @@
     "@trpc/server": "^10.26.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "ethers": "^6.7.1",
     "lucide-react": "^0.263.2-beta.0",
     "next": "^13.4.2",
     "react": "18.2.0",
