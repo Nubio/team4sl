@@ -5,7 +5,7 @@ import { authMiddleware } from "@clerk/nextjs";
 // See https://clerk.com/docs/nextjs/undefinedmiddleware for more information about configuring your middleware
 
 export default authMiddleware({
-  publicRoutes: ["/api/trpc/example.hello"],
+  publicRoutes: ["/api/trpc/example.hello", "/api/trpc/example.sample"],
 });
 
 export const config = {
