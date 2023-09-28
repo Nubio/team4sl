@@ -41,7 +41,7 @@ export const videoRouter = createTRPCRouter({
   getVideo: privateProcedure.query(({ ctx }) => {
     return ctx.prisma.video.findFirst();
   }),
-  triggerHook: privateProcedure.query(async ({ ctx }) => {
+  triggerHook: privateProcedure.mutation(async ({ ctx }) => {
     const video = await ctx.prisma.video.findFirst();
 
     if (!video?.silentDataHook) {
